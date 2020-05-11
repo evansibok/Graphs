@@ -47,11 +47,11 @@ class Graph:
         while q.size() > 0:
             # remove item
             removed_vertex = q.dequeue()
-        # check if removed item has been visited
+            # check if removed item has been visited
             if removed_vertex not in visited:
                 # if no, add to the list of visited
                 visited.add(removed_vertex)
-            # add all it's neighbors to the queue
+                # add all it's neighbors to the queue
                 for next_vertex in self.get_neighbors(removed_vertex):
                     q.enqueue(next_vertex)
 
@@ -60,7 +60,23 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Initialize an empty stack
+        s = Stack()
+        # add the starting vertex to the stack
+        s.push(starting_vertex)
+        # Create a set to store list of visited vertices
+        visited = set()
+        # while the stack isn't empty
+        while s.size() > 0:
+            # remove item
+            removed_vertex = s.pop()
+            # check if removed item has been visited
+            if removed_vertex not in visited:
+                # if no, add to the list of visited
+                visited.add(removed_vertex)
+                # add all it's neighbors to the stack
+                for next_vertex in self.get_neighbors(removed_vertex):
+                    s.push(next_vertex)
 
     def dft_recursive(self, starting_vertex):
         """
