@@ -26,6 +26,9 @@ class Stack():
     def __init__(self):
         self.stack = []
 
+    def __repr__(self):
+        return f"{self.stack}"
+
     def push(self, value):
         self.stack.append(value)
 
