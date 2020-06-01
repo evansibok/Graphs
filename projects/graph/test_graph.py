@@ -1,7 +1,7 @@
 import unittest
 import sys
 import io
-from new_graph import Graph
+from graph import Graph
 
 
 class Test(unittest.TestCase):

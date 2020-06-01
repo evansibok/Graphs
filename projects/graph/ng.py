@@ -24,7 +24,7 @@ class Graph:
         if v1 in self.vertices and v2 in self.vertices:
             self.vertices[v1].add(v2)
         else:
-            raise IndexError("Vertex not found!")
+            raise IndexError("Vertex doesn't exist!")
 
     def get_neighbors(self, vertex_id):
         """
@@ -37,7 +37,24 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Initialize an empty queue
+        q = Queue()
+        # add the starting vertex to the queue
+        q.enqueue(starting_vertex)
+        # Create a set to store list of visited vertices
+        visited = set()
+        # while the queue isn't empty
+        while q.size() > 0:
+            # remove item
+            removed_vertex = q.dequeue()
+            # check if removed item has been visited
+            if removed_vertex not in visited:
+                # if no, add to the list of visited
+                print('queue removed', removed_vertex)
+                visited.add(removed_vertex)
+                # add all it's neighbors to the queue
+                for next_vertex in self.get_neighbors(removed_vertex):
+                    q.enqueue(next_vertex)
 
     def dft(self, starting_vertex):
         """
@@ -50,6 +67,7 @@ class Graph:
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
+
         This should be done using recursion.
         """
         pass  # TODO
@@ -75,6 +93,7 @@ class Graph:
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
+
         This should be done using recursion.
         """
         pass  # TODO

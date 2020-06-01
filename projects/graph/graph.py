@@ -37,24 +37,25 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        # Initialize an empty queue
+        # Initialize queue
         q = Queue()
-        # add the starting vertex to the queue
+        # Add starting vertex to queue
         q.enqueue(starting_vertex)
-        # Create a set to store list of visited vertices
+        # Create a set to track visited vertices
         visited = set()
-        # while the queue isn't empty
+        # While queue is not empty
         while q.size() > 0:
-            # remove item
-            removed_vertex = q.dequeue()
-            # check if removed item has been visited
-            if removed_vertex not in visited:
-                # if no, add to the list of visited
-                print('queue removed', removed_vertex)
-                visited.add(removed_vertex)
-                # add all it's neighbors to the queue
-                for next_vertex in self.get_neighbors(removed_vertex):
-                    q.enqueue(next_vertex)
+            # dequeue item
+            v = q.dequeue()
+            # If removed item not in visited
+            if v not in visited:
+                # Add item to visited
+                visited.add(v)
+                print(v)
+                # Get neighbors
+                for next in self.vertices[v]:
+                    # Add neighbors to queue
+                    q.enqueue(next)
 
     def dft(self, starting_vertex):
         """
@@ -65,20 +66,21 @@ class Graph:
         s = Stack()
         # add the starting vertex to the stack
         s.push(starting_vertex)
-        # Create a set to store list of visited vertices
+        # Create a set to track visited vertices
         visited = set()
-        # while the stack isn't empty
+        # While stack isn't empty
         while s.size() > 0:
-            # remove item
-            removed_vertex = s.pop()
-            # check if removed item has been visited
-            if removed_vertex not in visited:
-                # if no, add to the list of visited
-                print('stack removed', removed_vertex)
-                visited.add(removed_vertex)
-                # add all it's neighbors to the stack
-                for next_vertex in self.get_neighbors(removed_vertex):
-                    s.push(next_vertex)
+            # pop item
+            v = s.pop()
+            # if item hasn't been visited
+            if v not in visited:
+                # add item to visited
+                visited.add(v)
+                print(v)
+                # get neighbors of item
+                for next in self.get_neighbors(v):
+                    # add them to queue
+                    s.push(next)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -95,45 +97,46 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        # Initialize an empty Queue
-        q = Queue()
-        # Initialize an empty set to track visited vertices
-        visited = set()
-        # add the path to the starting vertex to the queue
-        q.enqueue([starting_vertex])
-        # while the queue isn't empty
-        while q.size() > 0:
-            # remove the first path to the vertex in the queue
-            removed_path = q.dequeue()
-            print('removed path', removed_path)
-            # grab the last vertex from the removed path
-            # and initialize to a variable
-            last_vertex = removed_path[-1]
-            print('last vertex', last_vertex)
-            # if vertex is not in visited
-            if last_vertex not in visited:
-                # check if it is the target
-                if last_vertex == destination_vertex:
-                    # return the path to the target
-                    return removed_path
-                # mark it visited
-                visited.add(last_vertex)
-                print('visited', visited)
-            # add path to naighbours to back of queue
-            for next_vertex in self.get_neighbors(last_vertex):
-                # copy the path (Copying the path returns in a bug)
-                # where elements you don't want get added and called
-                # before they're needed
-                # cp = removed_path
-                # print('first cp', cp)
-                # cp.append(next_vertex)
-                cp = removed_path + [next_vertex]
-                print('direct cp append', cp)
-                # append the neighbor to the back of it
-                q.enqueue(cp)
-                print('q', q)
-        # return none
-        return None
+        # # Initialize an empty Queue
+        # q = Queue()
+        # # Initialize an empty set to track visited vertices
+        # visited = set()
+        # # add the path to the starting vertex to the queue
+        # q.enqueue([starting_vertex])
+        # # while the queue isn't empty
+        # while q.size() > 0:
+        #     # remove the first path to the vertex in the queue
+        #     removed_path = q.dequeue()
+        #     print('removed path', removed_path)
+        #     # grab the last vertex from the removed path
+        #     # and initialize to a variable
+        #     last_vertex = removed_path[-1]
+        #     print('last vertex', last_vertex)
+        #     # if vertex is not in visited
+        #     if last_vertex not in visited:
+        #         # check if it is the target
+        #         if last_vertex == destination_vertex:
+        #             # return the path to the target
+        #             return removed_path
+        #         # mark it visited
+        #         visited.add(last_vertex)
+        #         print('visited', visited)
+        #     # add path to naighbours to back of queue
+        #     for next_vertex in self.get_neighbors(last_vertex):
+        #         # copy the path (Copying the path returns in a bug)
+        #         # where elements you don't want get added and called
+        #         # before they're needed
+        #         # cp = removed_path
+        #         # print('first cp', cp)
+        #         # cp.append(next_vertex)
+        #         cp = removed_path + [next_vertex]
+        #         print('direct cp append', cp)
+        #         # append the neighbor to the back of it
+        #         q.enqueue(cp)
+        #         print('q', q)
+        # # return none
+        # return None
+        pass  # TODO
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -141,45 +144,46 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        # Initialize an empty Stack
-        s = Stack()
-        # Initialize an empty set to track visited vertices
-        visited = set()
-        # add the path to the starting vertex to the stack
-        s.push([starting_vertex])
-        # while the stack isn't empty
-        while s.size() > 0:
-            # remove the first path to the vertex in the stack
-            removed_path = s.pop()
-            print('removed path', removed_path)
-            # grab the last vertex from the removed path
-            # and initialize to a variable
-            last_vertex = removed_path[-1]
-            print('last vertex', last_vertex)
-            # if vertex is not in visited
-            if last_vertex not in visited:
-                # check if it is the target
-                if last_vertex == destination_vertex:
-                    # return the path to the target
-                    return removed_path
-                # mark it visited
-                visited.add(last_vertex)
-                print('visited', visited)
-            # add path to naighbours to back of stack
-            for next_vertex in self.get_neighbors(last_vertex):
-                # copy the path (Copying the path returns in a bug)
-                # where elements you don't want get added and called
-                # before they're needed
-                # cp = removed_path
-                # print('first cp', cp)
-                # cp.append(next_vertex)
-                cp = removed_path + [next_vertex]
-                print('direct cp append', cp)
-                # append the neighbor to the back of it
-                s.push(cp)
-                print('s', s)
-        # return none
-        return None
+        # # Initialize an empty Stack
+        # s = Stack()
+        # # Initialize an empty set to track visited vertices
+        # visited = set()
+        # # add the path to the starting vertex to the stack
+        # s.push([starting_vertex])
+        # # while the stack isn't empty
+        # while s.size() > 0:
+        #     # remove the first path to the vertex in the stack
+        #     removed_path = s.pop()
+        #     print('removed path', removed_path)
+        #     # grab the last vertex from the removed path
+        #     # and initialize to a variable
+        #     last_vertex = removed_path[-1]
+        #     print('last vertex', last_vertex)
+        #     # if vertex is not in visited
+        #     if last_vertex not in visited:
+        #         # check if it is the target
+        #         if last_vertex == destination_vertex:
+        #             # return the path to the target
+        #             return removed_path
+        #         # mark it visited
+        #         visited.add(last_vertex)
+        #         print('visited', visited)
+        #     # add path to naighbours to back of stack
+        #     for next_vertex in self.get_neighbors(last_vertex):
+        #         # copy the path (Copying the path returns in a bug)
+        #         # where elements you don't want get added and called
+        #         # before they're needed
+        #         # cp = removed_path
+        #         # print('first cp', cp)
+        #         # cp.append(next_vertex)
+        #         cp = removed_path + [next_vertex]
+        #         print('direct cp append', cp)
+        #         # append the neighbor to the back of it
+        #         s.push(cp)
+        #         print('s', s)
+        # # return none
+        # return None
+        pass  # TODO
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
