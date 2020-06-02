@@ -97,46 +97,37 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        # # Initialize an empty Queue
-        # q = Queue()
-        # # Initialize an empty set to track visited vertices
-        # visited = set()
-        # # add the path to the starting vertex to the queue
-        # q.enqueue([starting_vertex])
-        # # while the queue isn't empty
-        # while q.size() > 0:
-        #     # remove the first path to the vertex in the queue
-        #     removed_path = q.dequeue()
-        #     print('removed path', removed_path)
-        #     # grab the last vertex from the removed path
-        #     # and initialize to a variable
-        #     last_vertex = removed_path[-1]
-        #     print('last vertex', last_vertex)
-        #     # if vertex is not in visited
-        #     if last_vertex not in visited:
-        #         # check if it is the target
-        #         if last_vertex == destination_vertex:
-        #             # return the path to the target
-        #             return removed_path
-        #         # mark it visited
-        #         visited.add(last_vertex)
-        #         print('visited', visited)
-        #     # add path to naighbours to back of queue
-        #     for next_vertex in self.get_neighbors(last_vertex):
-        #         # copy the path (Copying the path returns in a bug)
-        #         # where elements you don't want get added and called
-        #         # before they're needed
-        #         # cp = removed_path
-        #         # print('first cp', cp)
-        #         # cp.append(next_vertex)
-        #         cp = removed_path + [next_vertex]
-        #         print('direct cp append', cp)
-        #         # append the neighbor to the back of it
-        #         q.enqueue(cp)
-        #         print('q', q)
-        # # return none
-        # return None
-        pass  # TODO
+        # Initialize empty Queue
+        q = Queue()
+        # Add path to the queue
+        q.enqueue([starting_vertex])
+        # Create set to track visited
+        visited = set()
+        # While queue is empty
+        while q.size() > 0:
+            # dequeue path
+            path = q.dequeue()
+            print('path', path)
+            # grab the last vertex from the removed path
+            # and initialize to a variable
+            last_v = path[-1]
+            print("last_v", last_v)
+            # if vertex is not in visited
+            if last_v not in visited:
+                # check if it is the target
+                if last_v == destination_vertex:
+                    # return the path to the target
+                    return path
+                # mark it visited
+                visited.add(last_v)
+                # add path to naighbours to back of queue
+                for next in self.get_neighbors(last_v):
+                    # copy the path (Copying the path returns in a bug)
+                    # append the neighbor to the back of it
+                    cp = path + [next]
+                    print('cp', cp)
+                    # add it to the queue
+                    q.enqueue(cp)
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -144,46 +135,33 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        # # Initialize an empty Stack
-        # s = Stack()
-        # # Initialize an empty set to track visited vertices
-        # visited = set()
-        # # add the path to the starting vertex to the stack
-        # s.push([starting_vertex])
-        # # while the stack isn't empty
-        # while s.size() > 0:
-        #     # remove the first path to the vertex in the stack
-        #     removed_path = s.pop()
-        #     print('removed path', removed_path)
-        #     # grab the last vertex from the removed path
-        #     # and initialize to a variable
-        #     last_vertex = removed_path[-1]
-        #     print('last vertex', last_vertex)
-        #     # if vertex is not in visited
-        #     if last_vertex not in visited:
-        #         # check if it is the target
-        #         if last_vertex == destination_vertex:
-        #             # return the path to the target
-        #             return removed_path
-        #         # mark it visited
-        #         visited.add(last_vertex)
-        #         print('visited', visited)
-        #     # add path to naighbours to back of stack
-        #     for next_vertex in self.get_neighbors(last_vertex):
-        #         # copy the path (Copying the path returns in a bug)
-        #         # where elements you don't want get added and called
-        #         # before they're needed
-        #         # cp = removed_path
-        #         # print('first cp', cp)
-        #         # cp.append(next_vertex)
-        #         cp = removed_path + [next_vertex]
-        #         print('direct cp append', cp)
-        #         # append the neighbor to the back of it
-        #         s.push(cp)
-        #         print('s', s)
-        # # return none
-        # return None
-        pass  # TODO
+        # Initialize an empty Stack
+        s = Stack()
+        # Add the starting vertex path to the stack
+        s.push([starting_vertex])
+        # Create a visited set to track vertices
+        visited = set()
+        # While Stack isn't empty
+        while s.size() > 0:
+            # pop the stack
+            path = s.pop()
+            # grab the last vertex from the popped vertex
+            last_v = path[-1]
+            # if it isn't in visited
+            if last_v not in visited:
+                # check if it is the target
+                if last_v == destination_vertex:
+                    # if it is
+                    # return the path
+                    return path
+                # otherwise, add to visited
+                visited.add(last_v)
+                # get its neighbors
+                for next in self.get_neighbors(last_v):
+                    # copy the path and append the path to the neighbors
+                    cp = path + [next]
+                    # push the new path to the stack
+                    s.push(cp)
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
