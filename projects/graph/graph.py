@@ -82,14 +82,29 @@ class Graph:
                     # add them to queue
                     s.push(next)
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        pass  # TODO
+
+        # Initial Case
+        if visited is None:
+            visited = set()
+
+        # Base Case
+        # How do we know we are done?
+        # Ans: When we have no more neighbors
+        # track visited nodes
+        visited.add(starting_vertex)
+        print(starting_vertex)
+
+        # call recursively on the neighbors of the last vertex that hasn't been visited
+        for next in self.get_neighbors(starting_vertex):
+            if next not in visited:
+                self.dft_recursive(next, visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
